@@ -1,3 +1,5 @@
+// Ponto de entrada ()
+
 import Phaser from 'phaser'
 
 //  Scenes

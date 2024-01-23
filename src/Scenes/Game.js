@@ -1,3 +1,5 @@
+// Scene (Cena) principal do Jogo
+
 import Phaser from "phaser";
 // Scenes
 // Constants
