@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #dfe6e9;
+}
+
+#gameContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*# sourceMappingURL=/script.f4196fbd.css.map */
