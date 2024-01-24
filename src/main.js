@@ -25,11 +25,8 @@ const config = {
      },
      render:  {
         clearBeforeRender: true
-     },
-     input: {
-      touch: false,
-      keyboard: true
      }
+ 
 }
 
 const game =  new Phaser.Game(config)

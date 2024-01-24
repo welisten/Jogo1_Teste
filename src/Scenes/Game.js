@@ -5,7 +5,7 @@ import Phaser from "phaser";
 // Constants
 import * as MapKeys from '../Consts/MapKeys'
 import * as Sizes from '../Consts/Sizes'
-import * as Difficulty from '..Scrooling/Consts/Difficulty'
+import * as Difficulty from '../Consts/Difficulty'
 import * as Animation from '../Consts/Animations'
 
 import * as CharactersKey from '../Consts/CharacterKeys'
@@ -56,16 +56,18 @@ export default class Game extends Phaser.Scene
         this.gameState = GameState.Running
     }
     create(){
+
         const map = this.add.tilemap(MapKeys.MapKey) // -> mapa
         const tiles = map.addTilesetImage(MapKeys.TileSetName, MapKeys.TileSetKey) // assets para criação do mapa
         
-        map.createLayer('base1', tiles, 0, 0) // camadas do mapa feita no TILED e referenciadas no JSON(Mapa)
-        map.createLayer('base2', tiles, 0, 0)
+        const base1 = map.createLayer('base1', tiles, 0, 0) // camadas do mapa feita no TILED e referenciadas no JSON(Mapa)
+        const base2 = map.createLayer('base2', tiles, 0, 0)
 
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels, true) // limites da camera
         this.cameras.main.setScroll( 0, Sizes.GameHeight) // configurando posicionamento da camera
         
-        createNeededAnimation() // criando as animações
+        // criando as animações
+        this.createNeededAnimation()
 
         this.player = this.add.sprite(Sizes.GameWidth / 2 , Sizes.GameHeight - 20 , CharactersKey.ManUpKey)
         this.player.play(Animation.ManWalkUpKey, true)
@@ -83,7 +85,7 @@ export default class Game extends Phaser.Scene
             return
         }
         
-        handleMainCharacterMovements()
+        this.handleMainCharacterMovements()
     
         this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
     }
@@ -112,7 +114,7 @@ export default class Game extends Phaser.Scene
         this.cameras.main.scrollY -= Difficulty.SpeedMapScrolling
     }
 
-    createNeededAnimation(){
+    createNeededAnimation() {
         const ManWalkUp = {
             key: Animation.ManWalkUpKey,
             frames: this.anims.generateFrameNumbers(CharactersKey.ManUpKey, {frame: [0, 1, 2, 3]}),
