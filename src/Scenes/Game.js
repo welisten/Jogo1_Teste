@@ -5,7 +5,7 @@ import Phaser from "phaser";
 // Constants
 import * as MapKeys from '../Consts/MapKeys'
 import * as Sizes from '../Consts/Sizes'
-import * as Difficulty from '../Consts/Difficulty'
+import * as Difficulty from '..Scrooling/Consts/Difficulty'
 import * as Animation from '../Consts/Animations'
 
 import * as CharactersKey from '../Consts/CharacterKeys'
@@ -85,7 +85,7 @@ export default class Game extends Phaser.Scene
         
         handleMainCharacterMovements()
     
-        this.time.delayedCall(Difficulty.DelayMap, () => this.handleMapScrolling())
+        this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
     }
 
     handleMainCharacterMovements(){
@@ -116,7 +116,7 @@ export default class Game extends Phaser.Scene
         const ManWalkUp = {
             key: Animation.ManWalkUpKey,
             frames: this.anims.generateFrameNumbers(CharactersKey.ManUpKey, {frame: [0, 1, 2, 3]}),
-            frameRate: Difficulty.FrameRate, 
+            frameRate: Difficulty.AnimationFrameRate, 
             repeat: -1,
         }
         this.anims.create(ManWalkUp)
@@ -124,7 +124,7 @@ export default class Game extends Phaser.Scene
         const ManWalkLeft = {
             key: Animation.ManWalkLeftKey,
             frames: this.anims.generateFrameNumbers(CharactersKey.ManLeftKey, {frame: [0, 1, 2, 3]}),
-            frameRate: Difficulty.FrameRate,
+            frameRate: Difficulty.AnimationFrameRate,
             repeat: 0,
         }
         this.anims.create(ManWalkLeft)
@@ -132,7 +132,7 @@ export default class Game extends Phaser.Scene
         const ManWalkRight = {
             key: Animation.ManWalkRightKey,
             frames: this.anims.generateFrameNumbers(CharactersKey.ManRightKey, {frame: [0, 1, 2, 3]}),
-            frameRate: Difficulty.FrameRate,
+            frameRate: Difficulty.AnimationFrameRate,
             repeat: 0,
         }
         this.anims.create(ManWalkRight)
@@ -140,7 +140,7 @@ export default class Game extends Phaser.Scene
         const DeerStangNe = {
             key: Animation.DeerKey,
             frames: this.anims.generateFrameNumbers(CharactersKey.DeerStagNeKey, {frame: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]}),
-            frameRate: Difficulty.FrameRate,
+            frameRate: Difficulty.AnimationFrameRate,
             repeat: -1,
         }
         this.anims.create(DeerStangNe)
