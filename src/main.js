@@ -25,6 +25,10 @@ const config = {
      },
      render:  {
         clearBeforeRender: true
+     },
+     input: {
+      touch: false,
+      keyboard: true
      }
 }
 
