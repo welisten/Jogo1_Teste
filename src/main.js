@@ -30,10 +30,10 @@ const config = {
 
 const game =  new Phaser.Game(config)
 
-// All the scenes must to be added here
+// Todas a cenas devem ser adicionadas ao jogo aqui
 game.scene.add(SceneKeys.Preload, Preload)
 game.scene.add(SceneKeys.Game, Game)
 
 
-// start the first scene(supposing all of them are chained)
+// Iniciar a primeira cena(Spondo qe todas elas estão encadeadas)
 game.scene.start(SceneKeys.Game)
