@@ -7,8 +7,8 @@ import * as MapKeys from '../Consts/MapKeys'
 import * as Sizes from '../Consts/Sizes'
 import * as Difficulty from '../Consts/Difficulty'
 import * as Animation from '../Consts/Animations'
-
 import * as CharactersKey from '../Consts/CharacterKeys'
+
 import characterLeft from '../assets/characters/character-left.png'
 import characterRight from '../assets/characters/character-right.png'
 import characterUp from '../assets/characters/character-up.png'
@@ -23,33 +23,45 @@ const GameState = {
 export default class Game extends Phaser.Scene
 {
     preload(){
-        this.load.image(MapKeys.TileSetKey, '../assets/tilesets/overworld.png')
-        this.load.tilemapTiledJSON(MapKeys.MapKey, '../assets/map/teste.json')
+        // this.load.image(MapKeys.OverworldSetKey, '../assets/tilesets/overworld.png')
+        // this.load.image(MapKeys.AtlasSetKey, '../assets/tilesets/atlas.png')
+        // this.load.image(MapKeys.Tiles_PackedSetKey, '../assets/tilesets/tiles_packed.png')
+
+        // this.load.tilemapTiledJSON(MapKeys.MapKey, '../assets/map/desktopMap.json')
+
+        // this.load.image('OV', '../assets/tilesets/overworld.png')
+        // this.load.image('AT', '../assets/tilesets/atlas.png')
+        // this.load.image(MapKeys.Tiles_PackedSetKey, '../assets/tilesets/tiles.png')
+    //    this.load.image({
+    //     key: MapKeys.MapKey,
+    //     url: '../assets/map/desktopMap.json',
+    //    })
+
         
 
-        this.load.spritesheet(CharactersKey.ManUpKey, characterUp,
-            {
-                frameWidth: 16,
-                frameHeight: 32
-            }, 4)
+        // this.load.spritesheet(CharactersKey.ManUpKey, characterUp,
+        //     {
+        //         frameWidth: 16,
+        //         frameHeight: 32
+        //     }, 4)
 
-        this.load.spritesheet(CharactersKey.ManRightKey, characterRight,
-            {
-                frameWidth: 16,
-                frameHeight: 32
-            }, 4)
+        // this.load.spritesheet(CharactersKey.ManRightKey, characterRight,
+        //     {
+        //         frameWidth: 16,
+        //         frameHeight: 32
+        //     }, 4)
 
-        this.load.spritesheet(CharactersKey.ManLeftKey, characterLeft,
-            {
-                frameWidth: 16,
-                frameHeight: 32
-            }, 4)
+        // this.load.spritesheet(CharactersKey.ManLeftKey, characterLeft,
+        //     {
+        //         frameWidth: 16,
+        //         frameHeight: 32
+        //     }, 4)
 
-        this.load.spritesheet(CharactersKey.DeerStagNeKey, DeerStagNe,
-            {
-                frameWidth: 32,
-                frameHeight: 41
-            }, 24)
+        // this.load.spritesheet(CharactersKey.DeerStagNeKey, DeerStagNe,
+        //     {
+        //         frameWidth: 32,
+        //         frameHeight: 41
+        //     }, 24)
     }
     
     init() {
@@ -58,18 +70,21 @@ export default class Game extends Phaser.Scene
     create(){
 
         const map = this.add.tilemap(MapKeys.MapKey) // -> mapa
-        const tiles = map.addTilesetImage(MapKeys.TileSetName, MapKeys.TileSetKey) // assets para criação do mapa
+        const overworldSet = map.addTilesetImage(MapKeys.OverworldSetName, MapKeys.OverworldSetKey) // assets para criação do mapa
+        const atlasSet = map.addTilesetImage(MapKeys.AtlasSetName, MapKeys.AtlasSetKey) 
+        const tiled_packedSet = map.addTilesetImage(MapKeys.Tiles_PackedSetName, MapKeys.Tiles_PackedSetKey) 
         
-        const base1 = map.createLayer('base1', tiles, 0, 0) // camadas do mapa feita no TILED e referenciadas no JSON(Mapa)
-        const base2 = map.createLayer('base2', tiles, 0, 0)
+        const base1 = map.createLayer('ground', overworldSet, 0, 0) // camadas do mapa feita no TILED e referenciadas no JSON(Mapa)
+        const base2 = map.createLayer('objects', [overworldSet, atlasSet, tiled_packedSet], 0, 0)
+        const base3 = map.createLayer('details', [overworldSet, atlasSet, tiled_packedSet], 0, 0)
 
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels, true) // limites da camera
-        this.cameras.main.setScroll( 0, Sizes.GameHeight) // configurando posicionamento da camera
+        this.cameras.main.setScroll( 0, Sizes.DesktopGameHeight) // configurando posicionamento da camera
         
         // criando as animações
         this.createNeededAnimation()
 
-        this.player = this.add.sprite(Sizes.GameWidth / 2 , Sizes.GameHeight - 20 , CharactersKey.ManUpKey)
+        this.player = this.add.sprite(Sizes.DesktopGameWidth / 2 , Sizes.DesktopGameHeight - 20 , CharactersKey.ManUpKey)
         this.player.play(Animation.ManWalkUpKey, true)
         
         this.deer = this.add.sprite( 23 , 37, CharactersKey.DeerStagNeKey)
@@ -87,7 +102,7 @@ export default class Game extends Phaser.Scene
         
         this.handleMainCharacterMovements()
     
-        this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
+        // this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
     }
 
     handleMainCharacterMovements(){
