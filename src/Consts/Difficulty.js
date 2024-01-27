@@ -2,7 +2,7 @@
 
 const SpeedMapScrolling = 2
 const CharacterSpeed = 2
-const AnimationFrameRate = 8
+const AnimationFrameRate = '8'
 const DelayMapScrooling = 1000
 
 export {

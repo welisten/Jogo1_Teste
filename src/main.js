@@ -13,8 +13,10 @@ import * as SceneKeys from './Consts/SceneKeys'
 const config = {
      width: Sizes.DesktopGameWidth,
      height: Sizes.ScreenHeight * 0.7,
+     scaleMode: Phaser.Scale.ScaleModes.NONE,
      type: Phaser.AUTO,
      backgroundColor: 0x000000,
+     border: '5px solid #8e44ad',
      parent: 'gameContainer',
      physics: {
         default: 'arcade',
@@ -23,16 +25,16 @@ const config = {
             debug: false
         }
      },
-     render:  {
-        clearBeforeRender: true
-     }
+   //   render:  {
+   //      clearBeforeRender: true
+   //   }
  
 }
 
 const game =  new Phaser.Game(config)
 
 // Todas a cenas devem ser adicionadas ao jogo aqui
-game.sgcene.add(SceneKeys.Preload, Preload)
+game.scene.add(SceneKeys.Preload, Preload)
 game.scene.add(SceneKeys.Game, Game)
 
 
