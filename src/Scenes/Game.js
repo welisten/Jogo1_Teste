@@ -9,6 +9,8 @@ import * as Sizes from '../Consts/Sizes'
 import * as Difficulty from '../Consts/Difficulty'
 import * as Animation from '../Consts/Animations'
 import * as CharactersKey from '../Consts/CharacterKeys'
+import * as SongsKey from '../Consts/SongsKey'
+
 
 
 const GameState = {
@@ -42,11 +44,16 @@ export default class Game extends Phaser.Scene
         this.cameras.main.setBounds(0, 0, map1.widthInPixels, map1.heightInPixels, true) // limites da camera
         this.cameras.main.setScroll( 0, Sizes.DesktopGameHeight) // configurando posicionamento da camera
         
+        this.physics.world.setBounds(256, 0, Sizes.DesktopGameWidth - 256, Sizes.DesktopGameHeight)
+
+        this.sound.play(SongsKey.WaterfallKey, SongsKey.WaterfallConfig)
+        
         // criando as animações
         this.createNeededAnimation()
 
         this.player = this.add.sprite(Sizes.DesktopGameWidth / 2 , Sizes.DesktopGameHeight - 40 , CharactersKey.ManUpKey)
         this.player.play(Animation.ManWalkUpKey, true)
+        this.sound.play(SongsKey.KeyFootstepsOnWater, SongsKey.Config_footstepOnWater)
         
         this.deer = this.add.sprite( 23 , 37, CharactersKey.DeerStagNeKey)
         this.deer.play(Animation.DeerKey, true)
@@ -62,12 +69,13 @@ export default class Game extends Phaser.Scene
         }
         
         this.handleMainCharacterMovements()
+        
     
-        this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
+        // this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
     }
 
     handleMainCharacterMovements(){
-        if( !this.cursor.left.isDown && !this.cursor.right.isDown )
+        if( !this.cursor.left.isDown && !this.cursor.right.isDown)
         {
             this.player.key = CharactersKey.ManUpKey
             this.player.play(Animation.ManWalkUpKey, true)
@@ -88,6 +96,15 @@ export default class Game extends Phaser.Scene
 
     handleMapScrolling(){
         this.cameras.main.scrollY -= Difficulty.SpeedMapScrolling
+        // console.log(this.cameras.main.scrollY)
+        if(this.cameras.main.scrollY > 0){
+            
+            this.player.y -= Difficulty.CharacterSpeed
+        } else {
+            this.player.anims.stop()
+            this.sound.stopByKey(SongsKey.KeyFootstepsOnWater)
+        }
+
     }
 
     createNeededAnimation() {
@@ -95,7 +112,7 @@ export default class Game extends Phaser.Scene
             key: Animation.ManWalkUpKey,
             frames: this.anims.generateFrameNumbers(CharactersKey.ManUpKey, {frame: [0, 1, 2, 3]}),
             frameRate: Difficulty.AnimationFrameRate, 
-            repeat: -1,
+            repeat: Animation.manUp_repeatConfig,
         }
         this.anims.create(ManWalkUpConfig)
         

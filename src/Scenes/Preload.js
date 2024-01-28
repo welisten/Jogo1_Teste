@@ -7,9 +7,10 @@ import Phaser from "phaser";
 
 // consts
 import { Game } from "../Consts/SceneKeys";
+
 import * as MapKeys from '../Consts/MapKeys'
 import * as CharactersKey from '../Consts/CharacterKeys'
-
+import * as SongsKey from '../Consts/SongsKey'
 export default class Preload extends Phaser.Scene{
     preload(){
         // MAP
@@ -46,6 +47,8 @@ export default class Preload extends Phaser.Scene{
         )
 
         //SONGS
+        this.load.audio(SongsKey.KeyFootstepsOnWater, SongsKey.URLFootstepsOnWater)
+        this.load.audio(SongsKey.WaterfallKey, SongsKey.WaterfallURL)
     }
     
 
