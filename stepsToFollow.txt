@@ -1,0 +1,7 @@
+1 - finesh the class deer
+2 - implement the woods logic and find the best way to make it work
+3 - implement the trash logic and find the best way to make it work
+4 - put the steps song
+5 - set the worldBounds
+
+6 - resize characters's images

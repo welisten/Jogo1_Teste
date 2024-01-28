@@ -10,40 +10,42 @@ import { Game } from "../Consts/SceneKeys";
 import * as MapKeys from '../Consts/MapKeys'
 import * as CharactersKey from '../Consts/CharacterKeys'
 
-
-// import characterLeft from '../../public/assets/characters/character-left.png'
-// import characterRight from '../../public/assets/characters/character-right.png'
-// import characterUp from '../../public/assets/characters/character-up.png'
-// import DeerStagNe from '../../public/assets/characters/deer_stag_NE.png'
-
 export default class Preload extends Phaser.Scene{
     preload(){
+        // MAP
         this.load.image(MapKeys.TileSetKey, MapKeys.TilesSetURL)
         this.load.tilemapTiledJSON(MapKeys.Map1Key, MapKeys.Map1URL)
+        
+        // CHARACTERS
+        this.load.spritesheet(
+            CharactersKey.ManUpKey, 
+            CharactersKey.ManUpURL, 
+            CharactersKey.ManUp_FrameSettings,
+            CharactersKey.ManUp_FrameAmount
+        )
 
-        this.load.spritesheet(CharactersKey.ManUpKey, 'public/assets/characters/character-up.png',
-            {
-                frameWidth: 16,
-                frameHeight: 32
-            }, 4)
+        this.load.spritesheet(
+            CharactersKey.ManRightKey,
+            CharactersKey.ManRightURL,
+            CharactersKey.ManRight_FrameSettings,
+            CharactersKey.ManRight_FrameAmount
+        )
 
-        this.load.spritesheet(CharactersKey.ManRightKey, 'public/assets/characters/character-right.png',
-            {
-                frameWidth: 16,
-                frameHeight: 32
-            }, 4)
+        this.load.spritesheet(
+            CharactersKey.ManLeftKey,
+            CharactersKey.ManLeftURL,
+            CharactersKey.ManLeft_FrameSettings,
+            CharactersKey.ManLeft_FrameAmount
+        )
 
-        this.load.spritesheet(CharactersKey.ManLeftKey, 'public/assets/characters/character-left.png',
-            {
-                frameWidth: 16,
-                frameHeight: 32
-            }, 4)
+        this.load.spritesheet(
+            CharactersKey.DeerStagNeKey,
+            CharactersKey.DeerStagNeURL,
+            CharactersKey.DeerStagNe_FrameSettings,
+            CharactersKey.DeerStagNe_FrameAmount
+        )
 
-        this.load.spritesheet(CharactersKey.DeerStagNeKey, 'public/assets/characters/deer_stag_NE.png',
-            {
-                frameWidth: 32,
-                frameHeight: 41
-            }, 24)
+        //SONGS
     }
     
 
