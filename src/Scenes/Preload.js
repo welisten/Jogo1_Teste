@@ -7,6 +7,7 @@ import Phaser from "phaser";
 
 // consts
 import { Game } from "../Consts/SceneKeys";
+import { Title } from "../Consts/SceneKeys";
 
 import * as MapKeys from '../Consts/MapKeys'
 import * as CharactersKey from '../Consts/CharacterKeys'
@@ -65,6 +66,6 @@ export default class Preload extends Phaser.Scene{
 
         // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels, true) // limites da camera
         // this.cameras.main.setScroll( 0, Sizes.DesktopGameHeight) 
-        this.scene.start(Game)
+        this.scene.start(Title)
     }
 }

@@ -5,6 +5,7 @@ import Phaser from 'phaser'
 //  Scenes
 import Game from './Scenes/Game.js'
 import Preload from './Scenes/Preload'
+import Title from './Scenes/Title.js'
 
 //  Consts
 import * as Sizes from './Consts/Sizes'
@@ -35,6 +36,7 @@ const game =  new Phaser.Game(config)
 
 // Todas a cenas devem ser adicionadas ao jogo aqui
 game.scene.add(SceneKeys.Preload, Preload)
+game.scene.add(SceneKeys.Title, Title)
 game.scene.add(SceneKeys.Game, Game)
 
 

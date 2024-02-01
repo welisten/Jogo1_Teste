@@ -3,8 +3,10 @@
 
 const Game = 'game'
 const Preload = 'preload'
+const Title = 'title'
 
 export {
     Game,
-    Preload
+    Preload,
+    Title
 }
