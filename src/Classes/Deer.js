@@ -29,9 +29,4 @@
         
     }
 
-    setRotation(radian){
-        this.rotate = radian
-    }
-
-
  }

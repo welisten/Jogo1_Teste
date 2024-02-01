@@ -71,7 +71,7 @@ export default class Game extends Phaser.Scene
         this.handleMainCharacterMovements()
         
     
-        // this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
+        this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
     }
 
     handleMainCharacterMovements(){

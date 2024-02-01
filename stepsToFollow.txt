@@ -1,6 +1,22 @@
 OK - (resize characters's images)
+OK - (put the steps song)
+
 1 - finesh the class deer
 2 - implement the woods logic and find the best way to make it work
 3 - implement the trash logic and find the best way to make it work
-4 - put the steps song
-5 - set the worldBounds
+4 - set the worldBounds
+
+
+Link - Parallax:
+https://itch.io/game-assets/tag-parallax
+https://itch.io/profile/free-game-assets
+
+
+ia:
+https://zzzcode.ai/
+
+Opçoes:
+https://ansimuz.itch.io/mountain-dusk-parallax-background
+https://free-game-assets.itch.io/free-sky-with-clouds-background-pixel-art-set
+https://free-game-assets.itch.io/free-summer-pixel-art-backgrounds
+https://free-game-assets.itch.io/nature-landscapes-free-pixel-art
