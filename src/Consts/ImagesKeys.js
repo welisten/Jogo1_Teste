@@ -12,6 +12,8 @@ const Clouds_3 = 'Clouds_3'
 const Clouds3_URL = "public/assets/bg/clouds_3.png" 
 const Clouds_4 = 'Clouds_4'
 const Clouds4_URL = "public/assets/bg/clouds_4.png" 
+const Logo1= 'Logo_game1'
+const Logo1_URL = "public/assets/logos/Logo.png" 
 
 
 export {
@@ -29,5 +31,7 @@ export {
     Clouds3_URL,
     Clouds_4,
     Clouds4_URL,
+    Logo1,
+    Logo1_URL
     
 }

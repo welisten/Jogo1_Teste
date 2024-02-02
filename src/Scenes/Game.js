@@ -32,7 +32,8 @@ export default class Game extends Phaser.Scene
     }
 
     create()
-    {
+    { 
+        this.sound.play(SongsKey.WaterfallKey)
        
         const map1 = this.add.tilemap(MapKeys.Map1Key) // -> mapa
         const tileSetM1 = map1.addTilesetImage(MapKeys.TileSetName, MapKeys.TileSetKey)
@@ -46,7 +47,6 @@ export default class Game extends Phaser.Scene
         
         this.physics.world.setBounds(256, 0, Sizes.DesktopGameWidth - 256, Sizes.DesktopGameHeight)
 
-        this.sound.play(SongsKey.WaterfallKey, SongsKey.WaterfallConfig)
         
         // criando as animações
         this.createNeededAnimation()

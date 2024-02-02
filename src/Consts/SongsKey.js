@@ -12,6 +12,13 @@ const WaterfallConfig = {
     rate: 1,
     loop: true
 }
+const MusicG1Key = 'music_game1'
+const MusicG1URL = 'public/assets/songs/musicG1.mp3'
+const MusicG1Config = {
+    volume: 1,
+    rate: 1,
+    loop: true
+}
 
 export {
     KeyFootstepsOnWater,
@@ -19,6 +26,9 @@ export {
     Config_footstepOnWater,
     WaterfallKey,
     WaterfallURL,
-    WaterfallConfig
+    WaterfallConfig,
+    MusicG1Key,
+    MusicG1URL,
+    MusicG1Config
 
 }

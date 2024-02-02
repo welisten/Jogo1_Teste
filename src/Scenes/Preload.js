@@ -48,8 +48,8 @@ export default class Preload extends Phaser.Scene{
         )
 
         //SONGS
-        this.load.audio(SongsKey.KeyFootstepsOnWater, SongsKey.URLFootstepsOnWater)
-        this.load.audio(SongsKey.WaterfallKey, SongsKey.WaterfallURL)
+        this.load.audio(SongsKey.KeyFootstepsOnWater, SongsKey.URLFootstepsOnWater, SongsKey.Config_footstepOnWater)
+        this.load.audio(SongsKey.WaterfallKey, SongsKey.WaterfallURL, SongsKey.WaterfallConfig)
     }
     
 
