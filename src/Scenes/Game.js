@@ -21,6 +21,11 @@ const GameState = {
 
 export default class Game extends Phaser.Scene
 {
+    preload(){
+        this.load.audio(SongsKey.WaterfallKey, SongsKey.WaterfallURL)
+        this.load.audio(SongsKey.KeyFootstepsOnWater, SongsKey.URLFootstepsOnWater)
+    }
+
     init() 
     {
         this.gameState = GameState.Running
@@ -33,7 +38,7 @@ export default class Game extends Phaser.Scene
 
     create()
     { 
-        this.sound.play(SongsKey.WaterfallKey)
+        this.sound.play(SongsKey.WaterfallKey, SongsKey.WaterfallConfig)
        
         const map1 = this.add.tilemap(MapKeys.Map1Key) // -> mapa
         const tileSetM1 = map1.addTilesetImage(MapKeys.TileSetName, MapKeys.TileSetKey)
@@ -53,7 +58,7 @@ export default class Game extends Phaser.Scene
 
         this.player = this.add.sprite(Sizes.DesktopGameWidth / 2 , Sizes.DesktopGameHeight - 40 , CharactersKey.ManUpKey)
         this.player.play(Animation.ManWalkUpKey, true)
-        this.sound.play(SongsKey.KeyFootstepsOnWater, SongsKey.Config_footstepOnWater)
+        this.sound.play(SongsKey.KeyFootstepsOnWater,  SongsKey.Config_footstepOnWater )
         
         this.deer = this.add.sprite( 23 , 37, CharactersKey.DeerStagNeKey)
         this.deer.play(Animation.DeerKey, true)

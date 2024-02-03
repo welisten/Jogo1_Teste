@@ -12,9 +12,14 @@ const Clouds_3 = 'Clouds_3'
 const Clouds3_URL = "public/assets/bg/clouds_3.png" 
 const Clouds_4 = 'Clouds_4'
 const Clouds4_URL = "public/assets/bg/clouds_4.png" 
-const Logo1= 'Logo_game1'
-const Logo1_URL = "public/assets/logos/Logo.png" 
 
+// const Logo1= 'Logo_game1'
+// const Logo1_URL = "public/assets/logos/Logo.png" 
+const Logo2= 'Logo_game2'
+const Logo2_URL = "public/assets/logos/Logo2.png" 
+
+const RecStart = 'Rec_Start'
+const RecStart_URL = "public/assets/bg/rec_start.png"
 
 export {
     Background,
@@ -31,7 +36,11 @@ export {
     Clouds3_URL,
     Clouds_4,
     Clouds4_URL,
-    Logo1,
-    Logo1_URL
+    // Logo1,
+    // Logo1_URL,
+    Logo2,
+    Logo2_URL,
+    RecStart,
+    RecStart_URL
     
 }

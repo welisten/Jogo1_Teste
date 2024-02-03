@@ -8,7 +8,7 @@ const Config_footstepOnWater = {
 const WaterfallKey = 'waterfall1'
 const WaterfallURL = 'public/assets/songs/waterfall2.ogg'
 const WaterfallConfig = {
-    volume: 0.5,
+    volume: 0.3,
     rate: 1,
     loop: true
 }
@@ -30,5 +30,4 @@ export {
     MusicG1Key,
     MusicG1URL,
     MusicG1Config
-
 }
