@@ -31,14 +31,15 @@ export default class Game extends Phaser.Scene
         this.gameState = GameState.Running
 
         // styles
-        const gameCanvas = this.sys.game.canvas;
-        gameCanvas.style.border = "5px solid #8e44ad";
+        const gameCanvas = this.sys.game.canvas
+        gameCanvas.style.border = "5px solid #40A2E3";
         gameCanvas.style.borderRadius = "20px"
     }
 
     create()
     { 
-        this.sound.play(SongsKey.WaterfallKey, SongsKey.WaterfallConfig)
+        this.sound.play(SongsKey.WaterfallKey)
+        this.sound.play(SongsKey.KeyFootstepsOnWater)
        
         const map1 = this.add.tilemap(MapKeys.Map1Key) // -> mapa
         const tileSetM1 = map1.addTilesetImage(MapKeys.TileSetName, MapKeys.TileSetKey)
