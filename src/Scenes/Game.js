@@ -46,19 +46,32 @@ export default class Game extends Phaser.Scene
         const b1 = map1.createLayer( MapKeys.LayerID.layer1, tileSetM1, 0, 0)
         const b2 = map1.createLayer( MapKeys.LayerID.layer2, tileSetM1, 0, 0) 
         const b3 = map1.createLayer( MapKeys.LayerID.layer3, tileSetM1, 0, 0)
-
+        
+        var collisionObjects = map1.getObjectLayer(MapKeys.ObjectsKeys.WallKey)["objects"]
+        //  console.log(collisionObjects)
+        collisionObjects.forEach(object => {
+            var objRec = new Phaser.Geom.Rectangle(object.x, object.y, object.width, object.height)
+            this.physics.add.existing(objRec, true)
+            this.physics.add.collider(this.player, objRec)
+            
+        })       
         this.cameras.main.setBounds(0, 0, map1.widthInPixels, map1.heightInPixels, true) // limites da camera
         this.cameras.main.setScroll( 0, Sizes.DesktopGameHeight) // configurando posicionamento da camera
         
         this.physics.world.setBounds(256, 0, Sizes.DesktopGameWidth - 256, Sizes.DesktopGameHeight)
-
+        
         
         // criando as animações
         this.createNeededAnimation()
-
+        
         this.player = this.add.sprite(Sizes.DesktopGameWidth / 2 , Sizes.DesktopGameHeight - 40 , CharactersKey.ManUpKey)
         this.player.play(Animation.ManWalkUpKey, true)
         this.sound.play(SongsKey.KeyFootstepsOnWater,  SongsKey.Config_footstepOnWater )
+        
+        this.physics.add.collider(this.player, collisionObjects)
+        collisionObjects.forEach(object => {
+            
+        })
         
         this.deer = this.add.sprite( 23 , 37, CharactersKey.DeerStagNeKey)
         this.deer.play(Animation.DeerKey, true)

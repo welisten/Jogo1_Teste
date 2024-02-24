@@ -14,7 +14,9 @@ const LayerID = {
     layer3: 'b3',
 }
 
-
+const ObjectsKeys = {
+    WallKey: "wall"
+}
 export {
     Map1Key,
     Map1URL,
@@ -23,5 +25,6 @@ export {
     TileSetName,
     TilesSetURL,
     
-    LayerID
+    LayerID,
+    ObjectsKeys
 }
