@@ -6,6 +6,11 @@ const ManUpURL = 'public/assets/characters/character-up32x64.png'
 const ManUp_FrameSettings = { frameWidth: 32, frameHeight: 64 }
 const ManUp_FrameAmount = 4
 
+const ManDownKey = 'Man-down'
+const ManDownURL = 'public/assets/characters/character-down32x64.png'
+const ManDown_FrameSettings = { frameWidth: 32, frameHeight: 64 }
+const ManDown_FrameAmount = 4
+
 const ManRightKey = 'Man-right'
 const ManRightURL = 'public/assets/characters/character-right32x64.png'
 const ManRight_FrameSettings = { frameWidth: 32, frameHeight: 64 }
@@ -26,6 +31,11 @@ export {
     ManUpURL,
     ManUp_FrameSettings,
     ManUp_FrameAmount,
+
+    ManDownKey,
+    ManDownURL,
+    ManDown_FrameSettings,
+    ManDown_FrameAmount,
 
     ManRightKey,
     ManRightURL,

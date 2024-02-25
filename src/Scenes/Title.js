@@ -30,7 +30,7 @@ export default class Title extends Phaser.Scene{
 
     create(){
 
-        this.sound.play(SongsKey.MusicG1Key)
+        // this.sound.play(SongsKey.MusicG1Key)
 
         const {width, height} = this.scale
 

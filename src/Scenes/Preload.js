@@ -27,6 +27,13 @@ export default class Preload extends Phaser.Scene{
         )
 
         this.load.spritesheet(
+            CharactersKey.ManDownKey, 
+            CharactersKey.ManDownURL, 
+            CharactersKey.ManDown_FrameSettings,
+            CharactersKey.ManDown_FrameAmount
+        )
+
+        this.load.spritesheet(
             CharactersKey.ManRightKey,
             CharactersKey.ManRightURL,
             CharactersKey.ManRight_FrameSettings,
@@ -62,6 +69,6 @@ export default class Preload extends Phaser.Scene{
 
         // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels, true) // limites da camera
         // this.cameras.main.setScroll( 0, Sizes.DesktopGameHeight) 
-        this.scene.start(Title)
+        this.scene.start(Game)
     }
 }

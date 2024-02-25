@@ -26,39 +26,3 @@ https://free-game-assets.itch.io/nature-landscapes-free-pixel-art
 LER:
 
 
-Para adicionar colisão a uma camada de objetos em um jogo desenvolvido com o Phaser, você primeiro precisa criar um mapa e carregar seus objetos usando o Tiled Map Editor. Supondo que você já tenha feito isso e exportado o mapa para um arquivo JS, você pode seguir os passos abaixo para referenciar a camada de objetos e adicionar colisão a ela:
-
-Carregar o Mapa: No seu código Phaser, você precisará carregar o mapa que foi exportado do Tiled. Isso geralmente é feito usando this.load.tilemapTiledJSON() ou this.load.tilemapCSV() dependendo de como você exportou o mapa.
-
-Exemplo:
-
-javascript
-Copy code
-this.load.tilemapTiledJSON('mapa', 'caminho/para/seu/mapa.json');
-Criar a Camada de Objetos: Após carregar o mapa, você pode criar uma referência à camada de objetos usando this.make.tilemap() e map.getLayer(). É importante observar que a camada de objetos no Tiled é diferente das camadas de tiles. A camada de objetos é onde você coloca os objetos de colisão, itens, etc.
-
-Exemplo:
-
-javascript
-Copy code
-var map = this.make.tilemap({ key: 'mapa' });
-var camadaObjetos = map.getLayer('nome_da_camada_de_objetos');
-Adicionar Colisão: Depois de ter a referência à camada de objetos, você pode adicionar colisão aos objetos nela contidos. Isso é feito chamando this.physics.add.collider() ou this.physics.add.overlap() dependendo de como você deseja que a colisão funcione.
-
-Exemplo de colisão por sobreposição (overlap):
-
-javascript
-Copy code
-this.physics.add.overlap(player, camadaObjetos, suaFuncaoDeCallback, null, this);
-Exemplo de colisão com física (collider):
-
-javascript
-Copy code
-this.physics.add.collider(player, camadaObjetos, suaFuncaoDeCallback, null, this);
-Certifique-se de substituir player pelo sprite do jogador e suaFuncaoDeCallback pela função que deseja chamar quando ocorrer a colisão.
-
-Definir Objetos de Colisão no Tiled: Certifique-se de que você configurou corretamente os objetos de colisão na camada de objetos do Tiled. Isso envolve atribuir a cada objeto um tipo e uma forma de colisão (retangular, poligonal, etc.).
-
-Certifique-se de nomear corretamente as camadas no Tiled para que você possa referenciá-las corretamente em seu código Phaser.
-
-Esses são os passos básicos para referenciar uma camada de objetos e adicionar colisão a ela em um jogo Phaser usando um mapa exportado do Tiled. Certifique-se de ajustar os detalhes conforme necessário para o seu jogo específico.

@@ -16,7 +16,7 @@ import * as SongsKey from '../Consts/SongsKey'
 const GameState = {
     Running: 'running',
     Finished: 'finished',
-    paused: false
+    isPaused: false
 }
 
 export default class Game extends Phaser.Scene
@@ -38,41 +38,38 @@ export default class Game extends Phaser.Scene
 
     create()
     { 
-        this.sound.play(SongsKey.WaterfallKey)
-        this.sound.play(SongsKey.KeyFootstepsOnWater)
+        this.sound.play(SongsKey.WaterfallKey, SongsKey.Config_footstepOnWater)//         RETIRAR CONFIGURAÇÃO DEPOIS
+        this.sound.play(SongsKey.KeyFootstepsOnWater, SongsKey.Config_footstepOnWater) //         RETIRAR CONFIGURAÇÃO DEPOIS
        
         const map1 = this.add.tilemap(MapKeys.Map1Key) // -> mapa
         const tileSetM1 = map1.addTilesetImage(MapKeys.TileSetName, MapKeys.TileSetKey)
+        const layer1 = map1.createLayer( MapKeys.LayerID.layer1, tileSetM1, 0, 0)
+        const layer2 = map1.createLayer( MapKeys.LayerID.layer2, tileSetM1, 0, 0) 
+        const layer3 = map1.createLayer( MapKeys.LayerID.layer3, tileSetM1, 0, 0)
+
         
-        const b1 = map1.createLayer( MapKeys.LayerID.layer1, tileSetM1, 0, 0)
-        const b2 = map1.createLayer( MapKeys.LayerID.layer2, tileSetM1, 0, 0) 
-        const b3 = map1.createLayer( MapKeys.LayerID.layer3, tileSetM1, 0, 0)
-        
-        var collisionObjects = map1.getObjectLayer(MapKeys.ObjectsKeys.WallKey)["objects"]
-        //  console.log(collisionObjects)
-        collisionObjects.forEach(object => {
-            var objRec = new Phaser.Geom.Rectangle(object.x, object.y, object.width, object.height)
-            this.physics.add.existing(objRec, true)
-            this.physics.add.collider(this.player, objRec)
-            
-        })       
         this.cameras.main.setBounds(0, 0, map1.widthInPixels, map1.heightInPixels, true) // limites da camera
         this.cameras.main.setScroll( 0, Sizes.DesktopGameHeight) // configurando posicionamento da camera
-        
-        this.physics.world.setBounds(256, 0, Sizes.DesktopGameWidth - 256, Sizes.DesktopGameHeight)
-        
-        
+        this.physics.world.setBounds(0, 0, Sizes.DesktopGameWidth, Sizes.DesktopGameHeight)
+
         // criando as animações
         this.createNeededAnimation()
         
-        this.player = this.add.sprite(Sizes.DesktopGameWidth / 2 , Sizes.DesktopGameHeight - 40 , CharactersKey.ManUpKey)
-        this.player.play(Animation.ManWalkUpKey, true)
-        this.sound.play(SongsKey.KeyFootstepsOnWater,  SongsKey.Config_footstepOnWater )
+        this.player = this.physics.add.sprite(Sizes.DesktopGameWidth / 2 , Sizes.DesktopGameHeight - 40 , CharactersKey.ManUpKey)
+        this.player.setBounce(0, 0).setCollideWorldBounds(true);
+       
         
-        this.physics.add.collider(this.player, collisionObjects)
-        collisionObjects.forEach(object => {
+        this.collisionObjects = map1.getObjectLayer(MapKeys.ObjectsKeys.WallKey)["objects"] 
+        
+        this.collisionObjects.forEach(object => {
+        const objRec = this.add.rectangle(object.x, object.y, object.width, object.height).setDisplayOrigin(0)
+            this.physics.add.existing(objRec, true)
+            this.physics.add.collider(objRec, this.player, () => console.log('colidiu'))
             
-        })
+            
+        }) 
+        
+        this.sound.play(SongsKey.KeyFootstepsOnWater,  SongsKey.Config_footstepOnWater )
         
         this.deer = this.add.sprite( 23 , 37, CharactersKey.DeerStagNeKey)
         this.deer.play(Animation.DeerKey, true)
@@ -82,22 +79,26 @@ export default class Game extends Phaser.Scene
     }
 
     update() {
-        if(this.gameState != GameState.Running)
+        if(this.gameState != GameState.Running && !GameState.isPaused)
         {
             return
         }
         
-        this.handleMainCharacterMovements()
-        
-    
-        this.time.delayedCall(Difficulty.DelayMapScrooling, () => this.handleMapScrolling())
+        this.physics.world.collide(this.player, this.collisionObjects.objects);
+
+        this.time.delayedCall(Difficulty.DelayMapScrooling, () => {
+            this.handleMapScrolling()
+            this.handleMainCharacterMovements()
+        })
     }
 
     handleMainCharacterMovements(){
-        if( !this.cursor.left.isDown && !this.cursor.right.isDown)
+
+        
+        if(this.isScrolling && !this.cursor.left.isDown && !this.cursor.right.isDown)
         {
             this.player.key = CharactersKey.ManUpKey
-            this.player.play(Animation.ManWalkUpKey, true)
+            this.player.play({key: Animation.ManWalkUpKey, repeat: 0}, true)
         }
         else if( this.cursor.left.isDown )
         {   
@@ -111,16 +112,34 @@ export default class Game extends Phaser.Scene
             this.player.play(Animation.ManWalkRightKey, true)
             this.player.x += Difficulty.CharacterSpeed
         }
+
+        
+        if(!this.isScrolling && this.cursor.up.isDown)
+        {
+            this.player.key = CharactersKey.ManUpKey
+            this.player.play({key: Animation.ManWalkUpKey, repeat: 0}, true)
+            this.player.y -= Difficulty.CharacterSpeed
+        } 
+        else if(!this.isScrolling && this.cursor.down.isDown)
+        {
+            this.player.key = CharactersKey.ManDownKey
+            this.player.play(Animation.ManWalkDownKey, true)
+            this.player.y += Difficulty.CharacterSpeed
+        }
     }
 
     handleMapScrolling(){
-        this.cameras.main.scrollY -= Difficulty.SpeedMapScrolling
-        // console.log(this.cameras.main.scrollY)
+        this.isScrolling = false
+
         if(this.cameras.main.scrollY > 0){
             
+            this.cameras.main.scrollY -= Difficulty.SpeedMapScrolling
+            this.isScrolling = true
+
             this.player.y -= Difficulty.CharacterSpeed
         } else {
-            this.player.anims.stop()
+            
+            this.isScrolling = false
             this.sound.stopByKey(SongsKey.KeyFootstepsOnWater)
         }
 
@@ -131,7 +150,7 @@ export default class Game extends Phaser.Scene
             key: Animation.ManWalkUpKey,
             frames: this.anims.generateFrameNumbers(CharactersKey.ManUpKey, {frame: [0, 1, 2, 3]}),
             frameRate: Difficulty.AnimationFrameRate, 
-            repeat: Animation.manUp_repeatConfig,
+            repeat: 0,
         }
         this.anims.create(ManWalkUpConfig)
         
@@ -151,6 +170,14 @@ export default class Game extends Phaser.Scene
         }
         this.anims.create(ManWalkRightConfig)
 
+        const ManWalkDownConfig = {
+            key: Animation.ManWalkDownKey,
+            frames: this.anims.generateFrameNumbers(CharactersKey.ManDownKey, {frame: [0, 1, 2, 3]}),
+            frameRate: Difficulty.AnimationFrameRate, 
+            repeat: 0,
+        }
+        this.anims.create(ManWalkDownConfig)
+
         const DeerStangNeConfig = {
             key: Animation.DeerKey,
             frames: this.anims.generateFrameNumbers(CharactersKey.DeerStagNeKey, {frame: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]}),
@@ -158,6 +185,7 @@ export default class Game extends Phaser.Scene
             repeat: -1,
         }
         this.anims.create(DeerStangNeConfig)
+
     }
     
 }

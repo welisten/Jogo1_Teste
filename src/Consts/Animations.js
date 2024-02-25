@@ -5,12 +5,14 @@ const ManWalkUpKey = 'walk-up'
 const manUp_repeatConfig =  -1
 
 const ManWalkLeftKey = 'walk-left'
+const ManWalkDownKey = 'walk-down'
 const ManWalkRightKey = 'walk-right'
 const DeerKey =  "deer-stag"
 
 export {
     ManWalkUpKey,
     manUp_repeatConfig,
+    ManWalkDownKey,
     ManWalkRightKey,
     ManWalkLeftKey,
     DeerKey

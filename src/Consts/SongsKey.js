@@ -1,7 +1,7 @@
 const KeyFootstepsOnWater = 'footsteps_on_water'
 const URLFootstepsOnWater = 'public/assets/songs/footstepsOnWaterFast.mp3'
 const Config_footstepOnWater = {
-    volume: 0.8,
+    volume: 0,
     rate: 1.5,
     loop: true
 }
