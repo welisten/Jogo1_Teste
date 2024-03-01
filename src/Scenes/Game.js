@@ -109,7 +109,7 @@ export default class Game extends Phaser.Scene
         {
             this.player.key = CharactersKey.ManRightKey
             this.player.play(Animation.ManWalkRightKey, true)
-            this.player.x += Difficulty.CharacterSpeed
+            this.player.setVelocityX(100)        
         }
 
         
@@ -117,13 +117,13 @@ export default class Game extends Phaser.Scene
         {
             this.player.key = CharactersKey.ManUpKey
             this.player.play({key: Animation.ManWalkUpKey, repeat: 0}, true)
-            this.player.y -= Difficulty.CharacterSpeed
+            this.player.setVelocityY(-100)        
         } 
         else if(!this.isScrolling && this.cursor.down.isDown)
         {
             this.player.key = CharactersKey.ManDownKey
             this.player.play(Animation.ManWalkDownKey, true)
-            this.player.y += Difficulty.CharacterSpeed
+            this.player.setVelocityY(100)        
         }
     }
 
