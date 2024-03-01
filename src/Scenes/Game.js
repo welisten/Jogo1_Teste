@@ -62,13 +62,13 @@ export default class Game extends Phaser.Scene
         this.collisionObjects = map1.getObjectLayer(MapKeys.ObjectsKeys.WallKey)["objects"] 
         
         this.collisionObjects.forEach(object => {
-        const objRec = this.add.rectangle(object.x, object.y, object.width, object.height).setDisplayOrigin(0)
-            this.physics.add.existing(objRec, true)
-            this.physics.add.collider(objRec, this.player, () => console.log('colidiu'))
+            this.objRec = this.add.rectangle(object.x, object.y, object.width, object.height).setDisplayOrigin(0)
+            this.physics.add.existing(this.objRec, true)
+            this.physics.add.collider(this.player, this.objRec)
             
             
         }) 
-        
+        console.log(this.collisionObjects)
         this.sound.play(SongsKey.KeyFootstepsOnWater,  SongsKey.Config_footstepOnWater )
         
         this.deer = this.add.sprite( 23 , 37, CharactersKey.DeerStagNeKey)
@@ -84,12 +84,13 @@ export default class Game extends Phaser.Scene
             return
         }
         
+        this.handleMainCharacterMovements()
+        this.physics.world.collide(this.player, this.collisionObjects);
         
         this.time.delayedCall(Difficulty.DelayMapScrooling, () => {
             this.handleMapScrolling()
-            this.handleMainCharacterMovements()
         })
-        this.physics.world.collide(this.player, this.collisionObjects.objects);
+
     }
 
     handleMainCharacterMovements(){
@@ -104,7 +105,8 @@ export default class Game extends Phaser.Scene
         {   
             this.player.key =  CharactersKey.ManLeftKey
             this.player.play(Animation.ManWalkLeftKey, true)
-            this.player.setVelocityX(-100)        }
+            this.player.setVelocityX(-100)        
+        }
         else if (this.cursor.right.isDown)
         {
             this.player.key = CharactersKey.ManRightKey
