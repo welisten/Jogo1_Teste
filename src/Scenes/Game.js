@@ -84,12 +84,12 @@ export default class Game extends Phaser.Scene
             return
         }
         
-        this.physics.world.collide(this.player, this.collisionObjects.objects);
-
+        
         this.time.delayedCall(Difficulty.DelayMapScrooling, () => {
             this.handleMapScrolling()
             this.handleMainCharacterMovements()
         })
+        this.physics.world.collide(this.player, this.collisionObjects.objects);
     }
 
     handleMainCharacterMovements(){
@@ -104,8 +104,7 @@ export default class Game extends Phaser.Scene
         {   
             this.player.key =  CharactersKey.ManLeftKey
             this.player.play(Animation.ManWalkLeftKey, true)
-            this.player.x -= Difficulty.CharacterSpeed
-        }
+            this.player.setVelocityX(-100)        }
         else if (this.cursor.right.isDown)
         {
             this.player.key = CharactersKey.ManRightKey
