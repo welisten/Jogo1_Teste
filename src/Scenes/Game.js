@@ -60,16 +60,19 @@ export default class Game extends Phaser.Scene
        
         
         this.collisionObjects = map1.getObjectLayer(MapKeys.ObjectsKeys.WallKey)["objects"] 
+        console.log(this.collisionObjects)
         
         this.collisionObjects.forEach(object => {
             this.objRec = this.add.rectangle(object.x, object.y, object.width, object.height).setDisplayOrigin(0)
             this.physics.add.existing(this.objRec, true)
             this.physics.add.collider(this.player, this.objRec)
-            
-            
+            console.log(this.collisionObjects, object)
+
         }) 
-        console.log(this.collisionObjects)
+
+
         this.sound.play(SongsKey.KeyFootstepsOnWater,  SongsKey.Config_footstepOnWater )
+        
         
         this.deer = this.add.sprite( 23 , 37, CharactersKey.DeerStagNeKey)
         this.deer.play(Animation.DeerKey, true)
